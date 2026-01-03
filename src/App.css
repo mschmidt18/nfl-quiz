@@ -94,20 +94,6 @@
   grid-column: 2;
 }
 
-.back-button {
-  padding: 0.6em 1.2em;
-  background-color: var(--bg-button);
-  border: 1px solid var(--border-default);
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.back-button:hover {
-  background-color: var(--bg-button-hover);
-  border-color: var(--border-hover);
-}
-
 .icon-back-button {
   width: 2.5rem;
   height: 2.5rem;
@@ -135,13 +121,6 @@
   justify-content: center;
   margin: 2rem 0;
   min-height: 200px;
-}
-
-.divisions-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 1rem;
-  margin: 2rem 0;
 }
 
 .divisions-columns {
@@ -251,7 +230,6 @@
 }
 
 .next-button:hover {
-  background-color: var(--accent-primary);
   filter: brightness(0.9);
 }
 
@@ -370,7 +348,6 @@
 }
 
 .try-again-button:hover {
-  background-color: var(--accent-primary);
   filter: brightness(0.9);
 }
 
@@ -397,13 +374,6 @@
   font-size: 0.75em;
   font-weight: 400;
   color: var(--accent-secondary);
-}
-
-.teams-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 1rem;
-  min-height: 150px;
 }
 
 .teams-list {
@@ -466,6 +436,15 @@
 .division-zone.full.droppable {
   border-color: var(--error);
   background-color: var(--error-bg);
+}
+
+.division-zone:focus {
+  outline: 2px solid var(--accent-secondary);
+  outline-offset: 2px;
+}
+
+.division-zone:focus:not(:focus-visible) {
+  outline: none;
 }
 
 .division-header {
@@ -564,6 +543,15 @@
 .team-card:hover {
   background-color: var(--accent-bg-hover);
   border-color: var(--accent-primary);
+}
+
+.team-card:focus {
+  outline: 2px solid var(--accent-secondary);
+  outline-offset: 2px;
+}
+
+.team-card:focus:not(:focus-visible) {
+  outline: none;
 }
 
 .team-card-logo-container {
@@ -687,10 +675,6 @@
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   }
 
-  .divisions-grid {
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  }
-
   .mode-buttons {
     flex-direction: column;
     max-width: 400px;
@@ -713,10 +697,6 @@
 
   .mode-header h2 {
     font-size: 1.8em;
-  }
-
-  .divisions-grid {
-    grid-template-columns: repeat(2, 1fr);
   }
 
   .divisions-columns {
@@ -808,10 +788,6 @@
     white-space: nowrap;
   }
 
-  .teams-grid {
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-  }
-
   .results-grid {
     grid-template-columns: 1fr;
   }
@@ -861,10 +837,6 @@
     font-size: 0.85em;
   }
 
-  .divisions-grid {
-    grid-template-columns: 1fr;
-  }
-
   .divisions-columns {
     grid-template-columns: 1fr 1fr;
     gap: 0.8rem;
@@ -877,11 +849,6 @@
   .division-button {
     padding: 0.6rem 0.4rem;
     font-size: 0.75em;
-  }
-
-  .teams-grid {
-    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
-    gap: 0.75rem;
   }
 
   .mode-header h2 {

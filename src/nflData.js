@@ -1,3 +1,7 @@
+// Constants
+export const TEAMS_PER_DIVISION = 4;
+export const TOTAL_TEAMS = 32;
+
 // NFL Teams organized by division
 export const NFL_DIVISIONS = {
   'AFC East': [
@@ -80,3 +84,8 @@ export const getDivisionForTeam = (teamName) => {
 export const getLogoUrl = (abbr) => {
   return `https://a.espncdn.com/i/teamlogos/nfl/500/${abbr}.png`;
 };
+
+// Division arrays by conference
+export const AFC_DIVISIONS = ['AFC North', 'AFC East', 'AFC South', 'AFC West'];
+export const NFC_DIVISIONS = ['NFC North', 'NFC East', 'NFC South', 'NFC West'];
+export const ALL_DIVISIONS = [...AFC_DIVISIONS, ...NFC_DIVISIONS];

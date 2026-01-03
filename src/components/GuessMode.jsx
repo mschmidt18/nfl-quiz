@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
-import { getRandomTeam, getDivisionForTeam } from '../nflData'
+import { getRandomTeam, getDivisionForTeam, AFC_DIVISIONS, NFC_DIVISIONS } from '../nflData'
 import TeamCard from './TeamCard'
 
 export default function GuessMode({ onBack }) {
@@ -43,47 +43,60 @@ export default function GuessMode({ onBack }) {
       correctDivision
     })
     setIsAnswered(true)
-    setTotalAttempts(totalAttempts + 1)
+    setTotalAttempts(prev => prev + 1)
 
     if (isCorrect) {
-      setScore(score + 1)
+      setScore(prev => prev + 1)
     }
 
-    setUsedTeams(new Set([...usedTeams, currentTeam.name]))
+    setUsedTeams(prev => new Set([...prev, currentTeam.name]))
   }
 
   const handleNextTeam = () => {
     getNewTeam()
   }
 
-  const afcDivisions = ['AFC North', 'AFC East', 'AFC South', 'AFC West']
-  const nflDivisions = ['NFC North', 'NFC East', 'NFC South', 'NFC West']
+  const renderDivisionButton = (division) => {
+    const isSelected = isAnswered && feedback.selectedDivision === division
+    const isCorrectAnswer = isAnswered && division === feedback.correctDivision
+    let ariaLabel = division
+    if (isAnswered) {
+      if (isSelected && feedback.isCorrect) {
+        ariaLabel = `${division}, correct answer`
+      } else if (isSelected && !feedback.isCorrect) {
+        ariaLabel = `${division}, incorrect`
+      } else if (isCorrectAnswer) {
+        ariaLabel = `${division}, this was the correct answer`
+      }
+    }
 
-  const renderDivisionButton = (division) => (
-    <button
-      key={division}
-      className={`division-button ${
-        isAnswered
-          ? feedback.selectedDivision === division
-            ? feedback.isCorrect
-              ? 'correct'
-              : 'incorrect'
-            : division === feedback.correctDivision
-            ? 'correct-answer'
+    return (
+      <button
+        key={division}
+        className={`division-button ${
+          isAnswered
+            ? isSelected
+              ? feedback.isCorrect
+                ? 'correct'
+                : 'incorrect'
+              : isCorrectAnswer
+              ? 'correct-answer'
+              : ''
             : ''
-          : ''
-      }`}
-      onClick={() => handleGuess(division)}
-      disabled={isAnswered}
-    >
-      {division}
-    </button>
-  )
+        }`}
+        onClick={() => handleGuess(division)}
+        disabled={isAnswered}
+        aria-label={ariaLabel}
+      >
+        {division}
+      </button>
+    )
+  }
 
   return (
     <div className="guess-mode">
       <div className="mode-header">
-        <button className="icon-back-button" onClick={onBack} title="Back to Menu">←</button>
+        <button className="icon-back-button" onClick={onBack} title="Back to Menu" aria-label="Back to Menu">←</button>
         <h2>Division Guesser</h2>
       </div>
 
@@ -97,21 +110,25 @@ export default function GuessMode({ onBack }) {
             <div className="afc-column">
               <h3>AFC</h3>
               <div className="divisions-column">
-                {afcDivisions.map(renderDivisionButton)}
+                {AFC_DIVISIONS.map(renderDivisionButton)}
               </div>
             </div>
             <div className="nfc-column">
               <h3>NFC</h3>
               <div className="divisions-column">
-                {nflDivisions.map(renderDivisionButton)}
+                {NFC_DIVISIONS.map(renderDivisionButton)}
               </div>
             </div>
           </div>
 
           {isAnswered && (
-            <div className={`feedback ${feedback.isCorrect ? 'success' : 'error'}`}>
+            <div
+              className={`feedback ${feedback.isCorrect ? 'success' : 'error'}`}
+              role="status"
+              aria-live="polite"
+            >
               {feedback.isCorrect ? (
-                <p>✓ Correct!</p>
+                <p>Correct!</p>
               ) : (
                 <p>{currentTeam.name} is in the {feedback.correctDivision}.</p>
               )}

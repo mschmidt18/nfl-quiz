@@ -13,6 +13,13 @@ export default function TeamCard({ team, draggable = false, onDragStart, onClick
     }
   };
 
+  const handleKeyDown = (e) => {
+    if (onClick && (e.key === 'Enter' || e.key === ' ')) {
+      e.preventDefault();
+      onClick();
+    }
+  };
+
   const handleImageLoad = () => {
     setImageLoaded(true);
   };
@@ -29,7 +36,12 @@ export default function TeamCard({ team, draggable = false, onDragStart, onClick
         draggable={draggable}
         onDragStart={handleDragStart}
         onClick={onClick}
+        onKeyDown={handleKeyDown}
         style={style}
+        role={onClick ? 'button' : undefined}
+        tabIndex={onClick ? 0 : undefined}
+        aria-label={`${team.name}${selected ? ', selected' : ''}`}
+        aria-pressed={selected ? true : undefined}
       >
         <div className="compact-logo">
           {!imageLoaded && <div className="logo-placeholder">...</div>}
@@ -56,7 +68,11 @@ export default function TeamCard({ team, draggable = false, onDragStart, onClick
       draggable={draggable}
       onDragStart={handleDragStart}
       onClick={onClick}
+      onKeyDown={handleKeyDown}
       style={style}
+      role={onClick ? 'button' : undefined}
+      tabIndex={onClick ? 0 : undefined}
+      aria-label={team.name}
     >
       <div className="team-card-logo-container">
         {!imageLoaded && <div className="logo-placeholder">Loading...</div>}
