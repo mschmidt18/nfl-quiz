@@ -109,6 +109,37 @@ export default function AssignMode({ onBack }) {
     setSelectedTeam(null)
   }
 
+  const generateShareableResults = () => {
+    const percentage = Math.round((score / TOTAL_TEAMS) * 100)
+    let result = `NFL Division Quiz: ${score}/${TOTAL_TEAMS} (${percentage}%)\n\n`
+
+    ALL_DIVISIONS.forEach(division => {
+      const teamsInDivision = ALL_TEAMS.filter(team => assignments[team.name] === division)
+      const divisionEmojis = teamsInDivision
+        .map(team => getDivisionForTeam(team.name) === division ? '🟩' : '🟥')
+        .join('')
+      result += `${division}: ${divisionEmojis}\n`
+    })
+
+    return result
+  }
+
+  const handleShare = async () => {
+    const shareText = generateShareableResults()
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          text: shareText,
+          title: 'NFL Division Quiz Results'
+        })
+      } catch (err) {
+        if (err.name !== 'AbortError') {
+          console.error('Error sharing:', err)
+        }
+      }
+    }
+  }
+
   // Filter from stable shuffled order - teams stay in place
   const unassignedTeams = shuffledTeams.filter(team => !assignments[team.name])
 
@@ -137,6 +168,9 @@ export default function AssignMode({ onBack }) {
             <div className="final-score">
               Score: {score} / {TOTAL_TEAMS} ({Math.round((score / TOTAL_TEAMS) * 100)}%)
             </div>
+            <button className="share-button" onClick={handleShare}>
+              Share Results
+            </button>
 
             <div className="results-grid">
               {ALL_DIVISIONS.map(division => (

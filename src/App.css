@@ -351,6 +351,23 @@
   filter: brightness(0.9);
 }
 
+.share-button {
+  padding: 0.8em 2em;
+  font-size: 1.1em;
+  background-color: var(--success);
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.share-button:hover {
+  filter: brightness(0.9);
+}
+
 /* Team Pool */
 .team-pool {
   background-color: var(--bg-card);
