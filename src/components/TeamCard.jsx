@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { getLogoUrl } from '../nflData';
 
-export default function TeamCard({ team, draggable = false, onDragStart, onClick, style, compact = false }) {
+export default function TeamCard({ team, draggable = false, onDragStart, onClick, style, compact = false, selected = false }) {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
 
@@ -25,7 +25,7 @@ export default function TeamCard({ team, draggable = false, onDragStart, onClick
   if (compact) {
     return (
       <div
-        className={`team-card compact ${draggable ? 'draggable' : ''}`}
+        className={`team-card compact ${draggable ? 'draggable' : ''} ${selected ? 'selected' : ''}`}
         draggable={draggable}
         onDragStart={handleDragStart}
         onClick={onClick}

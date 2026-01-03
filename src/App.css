@@ -386,6 +386,18 @@
   margin-bottom: 0.6rem;
 }
 
+.pool-count {
+  font-size: 0.8em;
+  font-weight: 400;
+  color: #888;
+}
+
+.tap-hint {
+  font-size: 0.75em;
+  font-weight: 400;
+  color: #61dafb;
+}
+
 .teams-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
@@ -402,17 +414,32 @@
 /* Divisions Container */
 .divisions-container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: 1fr 1fr;
   gap: 1rem;
+}
+
+.conference-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.conference-header {
+  margin: 0 0 0.3rem 0;
+  font-size: 1.1em;
+  font-weight: 700;
+  color: #646cff;
+  text-align: center;
 }
 
 .division-zone {
   background-color: rgba(255, 255, 255, 0.05);
   border: 2px solid #444;
-  border-radius: 12px;
-  padding: 1rem;
-  min-height: 200px;
+  border-radius: 8px;
+  padding: 0.6rem;
+  min-height: 60px;
   transition: all 0.2s;
+  cursor: pointer;
 }
 
 .division-zone:hover {
@@ -420,16 +447,51 @@
   border-color: #646cff;
 }
 
-.division-zone h3 {
-  margin: 0 0 0.8rem 0;
-  font-size: 0.95em;
+.division-zone.droppable {
+  border-color: #61dafb;
+  background-color: rgba(97, 218, 251, 0.1);
+}
+
+.division-zone.droppable:hover {
+  background-color: rgba(97, 218, 251, 0.2);
+  border-color: #61dafb;
+}
+
+.division-zone.full {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.division-zone.full.droppable {
+  border-color: #f87171;
+  background-color: rgba(248, 113, 113, 0.1);
+}
+
+.division-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.4rem;
+}
+
+.division-name {
+  font-size: 0.85em;
   font-weight: 600;
+  color: #ddd;
+}
+
+.division-count {
+  font-size: 0.75em;
+  color: #888;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
 }
 
 .assigned-teams {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.3rem;
 }
 
 /* Submit Section */
@@ -565,6 +627,12 @@
   border-color: #646cff;
 }
 
+.team-card.compact.selected {
+  background-color: rgba(97, 218, 251, 0.25);
+  border-color: #61dafb;
+  box-shadow: 0 0 0 2px rgba(97, 218, 251, 0.4);
+}
+
 .compact-logo {
   display: flex;
   align-items: center;
@@ -653,8 +721,89 @@
     gap: 2rem;
   }
 
+  /* Assign mode mobile - keep 2 column layout */
   .divisions-container {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+  }
+
+  .conference-header {
+    font-size: 0.95em;
+  }
+
+  .division-zone {
+    padding: 0.5rem;
+    min-height: auto;
+  }
+
+  .division-header {
+    margin-bottom: 0.3rem;
+  }
+
+  .division-name {
+    font-size: 0.75em;
+  }
+
+  .division-count {
+    font-size: 0.65em;
+    padding: 0.1rem 0.3rem;
+  }
+
+  /* Assigned teams - logo only on mobile */
+  .assigned-teams {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+
+  .assigned-teams .team-card.compact {
+    padding: 0.25rem;
+    min-height: auto;
+    width: auto;
+  }
+
+  .assigned-teams .compact-logo {
+    width: 24px;
+    height: 24px;
+  }
+
+  .assigned-teams .compact-name {
+    display: none;
+  }
+
+  /* Team pool - horizontal scroll */
+  .team-pool {
+    padding: 0.5rem;
+    border-radius: 8px;
+  }
+
+  .team-pool h3 {
+    font-size: 0.9em;
+    margin-bottom: 0.4rem;
+  }
+
+  .teams-list {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 0.4rem;
+    padding-bottom: 0.5rem;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .teams-list .team-card.compact {
+    flex-shrink: 0;
+    padding: 0.35rem 0.5rem;
+  }
+
+  .teams-list .compact-logo {
+    width: 24px;
+    height: 24px;
+  }
+
+  .teams-list .compact-name {
+    font-size: 0.7em;
+    white-space: nowrap;
   }
 
   .teams-grid {
@@ -663,6 +812,19 @@
 
   .results-grid {
     grid-template-columns: 1fr;
+  }
+
+  .submit-section {
+    margin-top: 1rem;
+  }
+
+  .assignment-count {
+    font-size: 1em;
+  }
+
+  .submit-button {
+    padding: 0.6em 1.5em;
+    font-size: 1em;
   }
 }
 
@@ -724,10 +886,6 @@
     font-size: 1.5em;
   }
 
-  .division-zone h3 {
-    font-size: 0.95em;
-  }
-
   .team-card {
     min-height: 120px;
     padding: 0.75rem;
@@ -735,5 +893,36 @@
 
   .team-card-logo-container {
     height: 60px;
+  }
+
+  /* Assign mode - even more compact on small phones */
+  .conference-header {
+    font-size: 0.85em;
+    margin-bottom: 0.2rem;
+  }
+
+  .division-zone {
+    padding: 0.4rem;
+  }
+
+  .division-name {
+    font-size: 0.7em;
+  }
+
+  .division-count {
+    font-size: 0.6em;
+  }
+
+  .assigned-teams .compact-logo {
+    width: 20px;
+    height: 20px;
+  }
+
+  .teams-list .team-card.compact {
+    padding: 0.3rem 0.4rem;
+  }
+
+  .teams-list .compact-name {
+    font-size: 0.65em;
   }
 }

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { NFL_DIVISIONS, getAllTeams, getDivisionForTeam } from '../nflData'
+import { getAllTeams, getDivisionForTeam } from '../nflData'
 import TeamCard from './TeamCard'
 
 const shuffleArray = (array) => {
@@ -15,6 +15,9 @@ export default function AssignMode({ onBack }) {
   const [assignments, setAssignments] = useState({})
   const [submitted, setSubmitted] = useState(false)
   const [score, setScore] = useState(0)
+  const [selectedTeam, setSelectedTeam] = useState(null) // For tap-to-select on mobile
+  // Shuffle teams once on mount, keep stable order
+  const [shuffledTeams] = useState(() => shuffleArray(getAllTeams()))
   // Order divisions as: AFC (North, East, South, West), then NFC (North, East, South, West)
   const divisions = ['AFC North', 'AFC East', 'AFC South', 'AFC West', 'NFC North', 'NFC East', 'NFC South', 'NFC West']
 
@@ -52,6 +55,38 @@ export default function AssignMode({ onBack }) {
     setAssignments(newAssignments)
   }
 
+  // Tap-to-select handlers for mobile
+  const handleTeamTap = (team) => {
+    if (selectedTeam?.name === team.name) {
+      // Deselect if tapping same team
+      setSelectedTeam(null)
+    } else {
+      setSelectedTeam(team)
+    }
+  }
+
+  const handleDivisionTap = (division) => {
+    if (!selectedTeam) return
+
+    // Check if division already has 4 teams
+    const teamsInDivision = Object.values(assignments).filter(d => d === division).length
+    if (teamsInDivision >= 4) return
+
+    setAssignments({
+      ...assignments,
+      [selectedTeam.name]: division
+    })
+    setSelectedTeam(null)
+  }
+
+  const handleAssignedTeamTap = (team) => {
+    // Remove team from division and select it
+    const newAssignments = { ...assignments }
+    delete newAssignments[team.name]
+    setAssignments(newAssignments)
+    setSelectedTeam(team)
+  }
+
   const handleSubmit = () => {
     const allTeams = getAllTeams()
     let correctCount = 0
@@ -72,11 +107,11 @@ export default function AssignMode({ onBack }) {
     setAssignments({})
     setSubmitted(false)
     setScore(0)
+    setSelectedTeam(null)
   }
 
-  const unassignedTeams = shuffleArray(
-    getAllTeams().filter(team => !assignments[team.name])
-  )
+  // Filter from stable shuffled order - teams stay in place
+  const unassignedTeams = shuffledTeams.filter(team => !assignments[team.name])
 
   const teamsByDivision = {}
   divisions.forEach(division => {
@@ -151,31 +186,79 @@ export default function AssignMode({ onBack }) {
         ) : (
           <>
             <div className="divisions-container">
-              {divisions.map(division => (
-                <div
-                  key={division}
-                  className="division-zone"
-                  onDragOver={handleDragOver}
-                  onDrop={(e) => handleDropOnDivision(e, division)}
-                >
-                  <h3>{division}</h3>
-                  <div className="assigned-teams">
-                    {teamsByDivision[division].map(team => (
-                      <TeamCard
-                        key={team.name}
-                        team={team}
-                        draggable={true}
-                        onDragStart={handleDragStart}
-                        compact={true}
-                      />
-                    ))}
-                  </div>
-                </div>
-              ))}
+              <div className="conference-column">
+                <h3 className="conference-header">AFC</h3>
+                {['AFC North', 'AFC East', 'AFC South', 'AFC West'].map(division => {
+                  const teamsInDivision = teamsByDivision[division].length
+                  const directionName = division.replace('AFC ', '')
+                  return (
+                    <div
+                      key={division}
+                      className={`division-zone ${selectedTeam ? 'droppable' : ''} ${teamsInDivision >= 4 ? 'full' : ''}`}
+                      onDragOver={handleDragOver}
+                      onDrop={(e) => handleDropOnDivision(e, division)}
+                      onClick={() => handleDivisionTap(division)}
+                    >
+                      <div className="division-header">
+                        <span className="division-name">{directionName}</span>
+                        <span className="division-count">{teamsInDivision}/4</span>
+                      </div>
+                      <div className="assigned-teams">
+                        {teamsByDivision[division].map(team => (
+                          <TeamCard
+                            key={team.name}
+                            team={team}
+                            draggable={true}
+                            onDragStart={handleDragStart}
+                            onClick={() => handleAssignedTeamTap(team)}
+                            compact={true}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+              <div className="conference-column">
+                <h3 className="conference-header">NFC</h3>
+                {['NFC North', 'NFC East', 'NFC South', 'NFC West'].map(division => {
+                  const teamsInDivision = teamsByDivision[division].length
+                  const directionName = division.replace('NFC ', '')
+                  return (
+                    <div
+                      key={division}
+                      className={`division-zone ${selectedTeam ? 'droppable' : ''} ${teamsInDivision >= 4 ? 'full' : ''}`}
+                      onDragOver={handleDragOver}
+                      onDrop={(e) => handleDropOnDivision(e, division)}
+                      onClick={() => handleDivisionTap(division)}
+                    >
+                      <div className="division-header">
+                        <span className="division-name">{directionName}</span>
+                        <span className="division-count">{teamsInDivision}/4</span>
+                      </div>
+                      <div className="assigned-teams">
+                        {teamsByDivision[division].map(team => (
+                          <TeamCard
+                            key={team.name}
+                            team={team}
+                            draggable={true}
+                            onDragStart={handleDragStart}
+                            onClick={() => handleAssignedTeamTap(team)}
+                            compact={true}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
             </div>
 
             <div className="team-pool" onDragOver={handleDragOver} onDrop={handleDropOnPool}>
-              <h3>Team Pool</h3>
+              <h3>
+                Team Pool <span className="pool-count">({unassignedTeams.length} remaining)</span>
+                {selectedTeam && <span className="tap-hint"> — Now tap a division</span>}
+              </h3>
               <div className="teams-list">
                 {unassignedTeams.map(team => (
                   <TeamCard
@@ -183,6 +266,8 @@ export default function AssignMode({ onBack }) {
                     team={team}
                     draggable={true}
                     onDragStart={handleDragStart}
+                    onClick={() => handleTeamTap(team)}
+                    selected={selectedTeam?.name === team.name}
                     compact={true}
                   />
                 ))}
