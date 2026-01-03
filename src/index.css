@@ -11,6 +11,39 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* Theme Colors - Dark Mode (default) */
+  --text-primary: #ddd;
+  --text-secondary: #aaa;
+  --text-muted: #888;
+
+  --bg-elevated: rgba(255, 255, 255, 0.05);
+  --bg-elevated-hover: rgba(100, 108, 255, 0.1);
+  --bg-card: rgba(255, 255, 255, 0.05);
+  --bg-button: #444;
+  --bg-button-hover: #555;
+  --bg-input: #1a1a1a;
+
+  --border-default: #666;
+  --border-light: #444;
+  --border-hover: #888;
+
+  --accent-primary: #646cff;
+  --accent-secondary: #61dafb;
+
+  --accent-bg-subtle: rgba(100, 108, 255, 0.05);
+  --accent-bg-hover: rgba(100, 108, 255, 0.1);
+  --accent-secondary-bg: rgba(97, 218, 251, 0.1);
+  --accent-secondary-bg-hover: rgba(97, 218, 251, 0.2);
+
+  --success: #4ade80;
+  --success-bg: rgba(74, 222, 128, 0.15);
+  --success-bg-strong: rgba(74, 222, 128, 0.25);
+
+  --error: #f87171;
+  --error-bg: rgba(248, 113, 113, 0.15);
+
+  --count-badge-bg: rgba(255, 255, 255, 0.1);
 }
 
 a {
@@ -60,6 +93,39 @@ button:focus-visible {
   :root {
     color: #213547;
     background-color: #ffffff;
+
+    /* Theme Colors - Light Mode */
+    --text-primary: #1a1a2e;
+    --text-secondary: #4a5568;
+    --text-muted: #718096;
+
+    --bg-elevated: rgba(0, 0, 0, 0.03);
+    --bg-elevated-hover: rgba(100, 108, 255, 0.08);
+    --bg-card: rgba(0, 0, 0, 0.02);
+    --bg-button: #e2e8f0;
+    --bg-button-hover: #cbd5e0;
+    --bg-input: #f7fafc;
+
+    --border-default: #cbd5e0;
+    --border-light: #e2e8f0;
+    --border-hover: #a0aec0;
+
+    --accent-primary: #5a5fcf;
+    --accent-secondary: #0891b2;
+
+    --accent-bg-subtle: rgba(90, 95, 207, 0.06);
+    --accent-bg-hover: rgba(90, 95, 207, 0.12);
+    --accent-secondary-bg: rgba(8, 145, 178, 0.1);
+    --accent-secondary-bg-hover: rgba(8, 145, 178, 0.18);
+
+    --success: #16a34a;
+    --success-bg: rgba(22, 163, 74, 0.12);
+    --success-bg-strong: rgba(22, 163, 74, 0.2);
+
+    --error: #dc2626;
+    --error-bg: rgba(220, 38, 38, 0.1);
+
+    --count-badge-bg: rgba(0, 0, 0, 0.08);
   }
   a:hover {
     color: #747bff;
