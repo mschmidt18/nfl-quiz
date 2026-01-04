@@ -24,6 +24,16 @@ export default function ModeSelector({ onSelectMode }) {
             Drag and drop all 32 teams to their correct divisions
           </div>
         </button>
+
+        <button
+          className="mode-button"
+          onClick={() => onSelectMode('qbPicker')}
+        >
+          <div className="button-title">QB Picker</div>
+          <div className="button-description">
+            Match each starting quarterback to their NFL team
+          </div>
+        </button>
       </div>
     </div>
   );

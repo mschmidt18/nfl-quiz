@@ -912,3 +912,375 @@
     font-size: 0.65em;
   }
 }
+
+/* ===== QB PICKER MODE ===== */
+/* Mobile-first design - everything fits without scrolling */
+
+.qb-picker-mode {
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.qb-picker-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.25rem 0;
+  flex-shrink: 0;
+}
+
+.qb-picker-header h2 {
+  margin: 0;
+  font-size: 1.2em;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.qb-picker-count {
+  font-size: 0.9em;
+  font-weight: 600;
+  color: var(--accent-primary);
+  background: var(--accent-bg-subtle);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  min-width: 2.5rem;
+  text-align: center;
+}
+
+.qb-picker-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Teams Grid - 2 columns (AFC | NFC) */
+.qb-teams-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.qb-conference-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.qb-conference-label {
+  font-size: 0.7em;
+  font-weight: 700;
+  color: var(--accent-primary);
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.qb-division-row {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.qb-division-label {
+  display: none;  /* Hidden on mobile */
+}
+
+.qb-division-teams {
+  display: flex;
+  gap: 0.2rem;
+  flex: 1;
+}
+
+/* Team Target */
+.qb-team-target {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  max-width: 60px;
+  border-radius: 4px;
+  background: var(--bg-card);
+  border: 2px solid var(--border-light);
+  cursor: pointer;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qb-team-target:hover {
+  border-color: var(--accent-primary);
+}
+
+.qb-team-target.droppable {
+  border-color: var(--accent-secondary);
+  background: var(--accent-secondary-bg);
+  box-shadow: 0 0 0 2px rgba(97, 218, 251, 0.3);
+}
+
+.qb-team-target.filled {
+  border-color: var(--success);
+}
+
+.qb-team-logo {
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
+}
+
+.qb-assigned-overlay {
+  position: absolute;
+  bottom: -6%;
+  right: -6%;
+  width: 45%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--bg-card);
+  background: var(--bg-card);
+  cursor: pointer;
+}
+
+.qb-assigned-headshot {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* QB Pool */
+.qb-pool {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  background: var(--bg-card);
+  border: 2px dashed var(--border-default);
+  border-radius: 8px;
+  padding: 0.5rem;
+  flex-shrink: 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.qb-pool-hint {
+  font-size: 0.7em;
+  color: var(--accent-secondary);
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.qb-pool-grid {
+  display: grid;
+  grid-template-rows: repeat(4, auto);
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(70px, 80px);
+  gap: 0.25rem 0.5rem;
+}
+
+/* QB Card */
+.qb-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  padding: 0.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s;
+  background: transparent;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.qb-card:hover:not(.assigned) {
+  background: var(--accent-bg-hover);
+}
+
+.qb-card.selected {
+  background: var(--accent-secondary-bg-hover);
+  box-shadow: 0 0 0 2px var(--accent-secondary);
+  border-radius: 6px;
+}
+
+.qb-card.assigned {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.qb-headshot {
+  width: 100%;
+  max-width: 32px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--bg-elevated);
+}
+
+.qb-name {
+  font-size: 0.6em;
+  color: var(--text-primary);
+  text-align: center;
+  line-height: 1.15;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+/* Submit Button */
+.qb-submit {
+  flex-shrink: 0;
+  width: 100%;
+  padding: 0.6rem;
+  font-size: 1em;
+}
+
+/* QB Results Grid */
+.qb-results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.5rem;
+  margin: 1rem 0;
+  max-height: 50vh;
+  overflow-y: auto;
+}
+
+.qb-result-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 6px;
+  background: var(--bg-elevated);
+}
+
+.qb-result-item.correct {
+  background: var(--success-bg);
+  border-left: 3px solid var(--success);
+}
+
+.qb-result-item.incorrect {
+  background: var(--error-bg);
+  border-left: 3px solid var(--error);
+}
+
+.qb-result-item.missing {
+  background: var(--bg-elevated);
+  border-left: 3px solid var(--text-muted);
+  opacity: 0.7;
+}
+
+.qb-result-logo {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.qb-result-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.qb-result-name {
+  font-size: 0.75em;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.qb-result-correct {
+  font-size: 0.65em;
+  color: var(--error);
+  opacity: 0.8;
+}
+
+.qb-result-missing {
+  font-size: 0.7em;
+  color: var(--text-muted);
+}
+
+/* Desktop enhancements */
+@media (min-width: 768px) {
+  .qb-picker-mode {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 1rem;
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+  }
+
+  .qb-picker-header h2 {
+    font-size: 1.8em;
+  }
+
+  .qb-picker-container {
+    gap: 1rem;
+    overflow: visible;
+  }
+
+  .qb-teams-grid {
+    gap: 1rem;
+  }
+
+  .qb-conference-label {
+    font-size: 0.9em;
+  }
+
+  .qb-division-row {
+    gap: 0.5rem;
+  }
+
+  .qb-division-label {
+    display: block;  /* Show on desktop */
+    font-size: 0.7em;
+    font-weight: 600;
+    color: var(--text-muted);
+    width: 3rem;
+    flex-shrink: 0;
+    text-align: right;
+  }
+
+  .qb-division-teams {
+    gap: 0.5rem;
+  }
+
+  .qb-team-target {
+    max-width: 70px;
+  }
+
+  .qb-pool {
+    padding: 1rem;
+    overflow-x: visible;
+  }
+
+  .qb-pool-grid {
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: auto;
+    grid-auto-flow: row;
+    grid-auto-columns: auto;
+    gap: 0.5rem;
+  }
+
+  .qb-card {
+    gap: 0.25rem;
+    padding: 0.4rem;
+  }
+
+  .qb-headshot {
+    max-width: 45px;
+  }
+
+  .qb-name {
+    font-size: 0.7em;
+  }
+
+  .qb-results-grid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  }
+}

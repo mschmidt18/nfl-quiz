@@ -3,6 +3,7 @@ import './App.css'
 import ModeSelector from './components/ModeSelector'
 import GuessMode from './components/GuessMode'
 import AssignMode from './components/AssignMode'
+import QBPickerMode from './components/QBPickerMode'
 
 function App() {
   const [mode, setMode] = useState(null)
@@ -16,6 +17,7 @@ function App() {
       {mode === null && <ModeSelector onSelectMode={setMode} />}
       {mode === 'guess' && <GuessMode onBack={handleBackToMenu} />}
       {mode === 'assign' && <AssignMode onBack={handleBackToMenu} />}
+      {mode === 'qbPicker' && <QBPickerMode onBack={handleBackToMenu} />}
     </div>
   )
 }

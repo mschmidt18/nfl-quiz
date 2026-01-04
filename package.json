@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "prebuild": "node scripts/fetchQBData.js",
+    "fetch-qbs": "node scripts/fetchQBData.js",
     "lint": "eslint .",
     "preview": "vite preview"
   },

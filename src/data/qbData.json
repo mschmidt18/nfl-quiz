@@ -1,0 +1,165 @@
+{
+  "lastUpdated": "2026-01-04",
+  "qbs": [
+    {
+      "name": "Josh Allen",
+      "athleteId": "3918298",
+      "teamAbbr": "buf"
+    },
+    {
+      "name": "Quinn Ewers",
+      "athleteId": "4889929",
+      "teamAbbr": "mia"
+    },
+    {
+      "name": "Drake Maye",
+      "athleteId": "4431452",
+      "teamAbbr": "ne"
+    },
+    {
+      "name": "Brady Cook",
+      "athleteId": "4429435",
+      "teamAbbr": "nyj"
+    },
+    {
+      "name": "Lamar Jackson",
+      "athleteId": "3916387",
+      "teamAbbr": "bal"
+    },
+    {
+      "name": "Joe Burrow",
+      "athleteId": "3915511",
+      "teamAbbr": "cin"
+    },
+    {
+      "name": "Shedeur Sanders",
+      "athleteId": "4432762",
+      "teamAbbr": "cle"
+    },
+    {
+      "name": "Aaron Rodgers",
+      "athleteId": "8439",
+      "teamAbbr": "pit"
+    },
+    {
+      "name": "C.J. Stroud",
+      "athleteId": "4432577",
+      "teamAbbr": "hou"
+    },
+    {
+      "name": "Riley Leonard",
+      "athleteId": "4683423",
+      "teamAbbr": "ind"
+    },
+    {
+      "name": "Trevor Lawrence",
+      "athleteId": "4360310",
+      "teamAbbr": "jax"
+    },
+    {
+      "name": "Cam Ward",
+      "athleteId": "4688380",
+      "teamAbbr": "ten"
+    },
+    {
+      "name": "Bo Nix",
+      "athleteId": "4426338",
+      "teamAbbr": "den"
+    },
+    {
+      "name": "Chris Oladokun",
+      "athleteId": "4044111",
+      "teamAbbr": "kc"
+    },
+    {
+      "name": "Geno Smith",
+      "athleteId": "15864",
+      "teamAbbr": "lv"
+    },
+    {
+      "name": "Justin Herbert",
+      "athleteId": "4038941",
+      "teamAbbr": "lac"
+    },
+    {
+      "name": "Dak Prescott",
+      "athleteId": "2577417",
+      "teamAbbr": "dal"
+    },
+    {
+      "name": "Jaxson Dart",
+      "athleteId": "4689114",
+      "teamAbbr": "nyg"
+    },
+    {
+      "name": "Jalen Hurts",
+      "athleteId": "4040715",
+      "teamAbbr": "phi"
+    },
+    {
+      "name": "Marcus Mariota",
+      "athleteId": "2576980",
+      "teamAbbr": "wsh"
+    },
+    {
+      "name": "Caleb Williams",
+      "athleteId": "4431611",
+      "teamAbbr": "chi"
+    },
+    {
+      "name": "Jared Goff",
+      "athleteId": "3046779",
+      "teamAbbr": "det"
+    },
+    {
+      "name": "Jordan Love",
+      "athleteId": "4036378",
+      "teamAbbr": "gb"
+    },
+    {
+      "name": "J.J. McCarthy",
+      "athleteId": "4433970",
+      "teamAbbr": "min"
+    },
+    {
+      "name": "Kirk Cousins",
+      "athleteId": "14880",
+      "teamAbbr": "atl"
+    },
+    {
+      "name": "Bryce Young",
+      "athleteId": "4685720",
+      "teamAbbr": "car"
+    },
+    {
+      "name": "Tyler Shough",
+      "athleteId": "4360689",
+      "teamAbbr": "no"
+    },
+    {
+      "name": "Baker Mayfield",
+      "athleteId": "3052587",
+      "teamAbbr": "tb"
+    },
+    {
+      "name": "Jacoby Brissett",
+      "athleteId": "2578570",
+      "teamAbbr": "ari"
+    },
+    {
+      "name": "Matthew Stafford",
+      "athleteId": "12483",
+      "teamAbbr": "la"
+    },
+    {
+      "name": "Brock Purdy",
+      "athleteId": "4361741",
+      "teamAbbr": "sf"
+    },
+    {
+      "name": "Sam Darnold",
+      "athleteId": "3912547",
+      "teamAbbr": "sea"
+    }
+  ]
+}
